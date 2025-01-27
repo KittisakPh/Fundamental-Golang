@@ -12,7 +12,7 @@ func (c course) discount(d int) int {
 	return p
 }
 
-func (c course)info(){
+func (c course) info() {
 	fmt.Println("name:", c.name)
 	fmt.Println("instructor:", c.instructor)
 	fmt.Println("price:", c.price)
