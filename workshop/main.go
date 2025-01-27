@@ -2,6 +2,15 @@ package main
 
 import "fmt"
 
+type movie struct {
+	name        string
+	year        int
+	rating      float64
+	votes       []float64
+	genres      []string
+	isSuperHero bool
+}
+
 func main() {
 	// variable()
 	// formatting()
@@ -12,7 +21,30 @@ func main() {
 	// for_loop()
 	// slice()
 	// structure()
-	method()
+	// method()
+	pointer()
+}
+
+// ===========================================================
+// Workshop: pointer of struct
+// กำหนด: 1. ให้สร้าง method addVote รับพารามิเตอร์ rating เป็น float64
+// 	  2. ให้ method addVote เพิ่มค่า rating เข้าไปใน slice votes ของ struct movie
+//
+// Output:
+// votes: [7 8 9 10 6 9 9 10 8 8]
+// ===========================================================
+func (m *movie) addVote(ratings float64) {
+	m.votes = append(m.votes, ratings)
+}
+
+func pointer() {
+	mv := new(movie)
+	fmt.Printf("cap: %d --- votes: %#v\n", cap(mv.votes), mv.votes)
+	mv.votes = []float64{7, 8, 9, 10, 6, 9, 9, 10, 8}
+	fmt.Printf("cap: %d --- votes: %#v\n", cap(mv.votes), mv.votes)
+
+	mv.addVote(8)
+	fmt.Printf("votes: %v\n", mv.votes)
 }
 
 // ===========================================================
@@ -57,14 +89,6 @@ func method() {
 // main.movie{title:"Avengers: Endgame", year:2019, rating:8.4, genres:[]string{"Action", "Drama"}, isSuperHero:true}
 // main.movie{title:"Avengers: Infinity War", year:2018, rating:8.4, genres:[]string{"Action", "Sci-Fi"}, isSuperHero:true}
 // ===========================================================
-type movie struct {
-	name        string
-	year        int
-	rating      float64
-	genres      []string
-	isSuperHero bool
-}
-
 func structure() {
 	mvs := []movie{{
 		name:        "Avengers: Infinity War",
