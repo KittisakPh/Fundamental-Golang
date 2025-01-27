@@ -22,7 +22,31 @@ func main() {
 	// slice()
 	// structure()
 	// method()
-	pointer()
+	// pointer()
+	_interface()
+}
+
+// ===========================================================
+// Workshop: pointer of struct
+// กำหนด: 1. ให้สร้าง interface voter เพื่อให้สามารถนำ movie มาใช้ในการโหวตได้
+//
+// Output:
+// votes: [7 8 9 10 6 9 9 10 8]
+// ===========================================================
+type voter interface {
+	addVote(ratings float64)
+}
+
+func vote(v voter, ratings float64) {
+	v.addVote(ratings)
+}
+
+func _interface() {
+	movie := &movie{
+		votes: []float64{7, 8, 9, 10, 6, 9, 9, 10, 8},
+	}
+	vote(movie, 8)
+	fmt.Printf("votes: %v\n", movie.votes)
 }
 
 // ===========================================================
