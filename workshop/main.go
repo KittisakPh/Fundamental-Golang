@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 type movie struct {
 	name        string
@@ -23,7 +26,31 @@ func main() {
 	// structure()
 	// method()
 	// pointer()
-	_interface()
+	// _interface()
+	maps()
+}
+
+// ===========================================================
+// Workshop: maps
+// กำหนด: 1. ให้สร้างเขียนฟังก์ชัน WordCount เพื่อนำคำซ้ำในประโยค
+//
+//	strings.Fields น่าจะเป็นตัวช่วยได้ https://pkg.go.dev/strings#Fields
+//
+// Output:
+// map[string]int{"If":1, "a":4, "and":1, "duck":4, "is":1, "it":2, "like":3, "looks":1, "probably":1, "quacks":1, "swims":1, "then":1}
+// ===========================================================
+func wordCount(word string) map[string]int {
+	c := map[string]int{}
+	wordSplit := strings.Fields(word)
+	for _, val := range wordSplit {
+			c[val]++
+	}
+	return c
+}
+
+func maps() {
+	s := "If it looks like a duck swims like a duck and quacks like a duck then it probably is a duck"
+	fmt.Printf("%#v\n", wordCount(s))
 }
 
 // ===========================================================
@@ -52,7 +79,7 @@ func _interface() {
 // ===========================================================
 // Workshop: pointer of struct
 // กำหนด: 1. ให้สร้าง method addVote รับพารามิเตอร์ rating เป็น float64
-// 	  2. ให้ method addVote เพิ่มค่า rating เข้าไปใน slice votes ของ struct movie
+//  2. ให้ method addVote เพิ่มค่า rating เข้าไปใน slice votes ของ struct movie
 //
 // Output:
 // votes: [7 8 9 10 6 9 9 10 8 8]
@@ -78,8 +105,10 @@ func pointer() {
 // Output:
 // Avengers: Endgame (2019) - 8.40
 // Genres:
-// 				Action
-// 				Drama
+//
+//	Action
+//	Drama
+//
 // ===========================================================
 func (m movie) info() {
 	fmt.Printf("%s (%d) - %.2f\n", m.name, m.year, m.rating)
@@ -104,10 +133,10 @@ func method() {
 // ===========================================================
 // Workshop: struct
 // กำหนด: 1. ให้นิยามโครงสร้างข้อมูล movie เพื่อเก็บ ชื่อเรื่อง(string) ปี(ตัวเลข) เรตติ้ง(ตัวเลขทศนิยม) ประเภท(slice ของ string) และ isSuperHero(bool)
-// 	  2. ให้ประกาศตัวแปรเพื่อเก็บหนัง Avengers: Endgame, ปี:2019, เรตติ้ง:8.4, ประเภท:["Action", "Drama"] และ isSuperHero:true
-//	  3. ให้ประกาศตัวแปรเพื่อเก็บหนัง Infinity War, ปี:2018, เรตติ้ง:8.4, ประเภท:["Action", "Sci-Fi"] และ isSuperHero:true
-//	  4. ให้เก็บหนังทั้งสองเรื่องไว้ในตัวแปร mvs
-// 	  5. ทำการวนลูปเพื่อแสดงผลหนังทีละเรื่อง
+//  2. ให้ประกาศตัวแปรเพื่อเก็บหนัง Avengers: Endgame, ปี:2019, เรตติ้ง:8.4, ประเภท:["Action", "Drama"] และ isSuperHero:true
+//  3. ให้ประกาศตัวแปรเพื่อเก็บหนัง Infinity War, ปี:2018, เรตติ้ง:8.4, ประเภท:["Action", "Sci-Fi"] และ isSuperHero:true
+//  4. ให้เก็บหนังทั้งสองเรื่องไว้ในตัวแปร mvs
+//  5. ทำการวนลูปเพื่อแสดงผลหนังทีละเรื่อง
 //
 // Output:
 // main.movie{title:"Avengers: Endgame", year:2019, rating:8.4, genres:[]string{"Action", "Drama"}, isSuperHero:true}
@@ -138,8 +167,8 @@ func structure() {
 // ===========================================================
 // Workshop: slice
 // กำหนด: 1. เราได้เก็บสะสมคะแนนโหวตผู้ชมไว้เป็น 2 ชุด ที่เก็บอยู่ในตัวแปร xs และ ys เรียบร้อยแล้ว
-// 	  2. ให้ทำการรวมคะแนนโหวตที่อยู่ในตัวแปร xs และ ys ไปเก็บไว้ในตัวแปร votes ตามลำดับ (ค่าใน xs ทั้งหมดแล้วต่อด้วย ys).
-//	  3. ทำการแสดงผลคะแนนโหวตของผู้ชมที่อยู่ในตำแหน่ง(index)ที่ 5 ถึง 8 ของ votes ออกมาทางหน้าจอ
+//  2. ให้ทำการรวมคะแนนโหวตที่อยู่ในตัวแปร xs และ ys ไปเก็บไว้ในตัวแปร votes ตามลำดับ (ค่าใน xs ทั้งหมดแล้วต่อด้วย ys).
+//  3. ทำการแสดงผลคะแนนโหวตของผู้ชมที่อยู่ในตำแหน่ง(index)ที่ 5 ถึง 8 ของ votes ออกมาทางหน้าจอ
 //
 // Output:
 // votes: [4 5 7 8 3 8 0 7 2 10 9 7]
