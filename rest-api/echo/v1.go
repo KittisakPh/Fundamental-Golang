@@ -15,7 +15,7 @@ type Movie struct {
 	IsSuperHero bool    `json:"is_super_hero"`
 }
 
-var movies = []Movie{
+var moviesV1 = []Movie{
 	{
 		ImdbID:      "tt4154796",
 		Title:       "Avengers: Endgame",
@@ -25,17 +25,17 @@ var movies = []Movie{
 	},
 }
 
-func getAllMoviesHandler(c echo.Context) error {
+func getAllMoviesHandlerV1(c echo.Context) error {
 	y := c.QueryParam("year")
 	if y == "" {
-		return c.JSON(http.StatusOK, movies)
+		return c.JSON(http.StatusOK, moviesV1)
 	}
 	year, err := strconv.Atoi(y)
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, err.Error())
 	}
 	ms := []Movie{}
-	for _, m := range movies {
+	for _, m := range moviesV1 {
 		if m.Year == year {
 			ms = append(ms, m)
 		}
@@ -43,8 +43,8 @@ func getAllMoviesHandler(c echo.Context) error {
 	return c.JSON(http.StatusOK, ms)
 }
 
-func getMovieByIdHandler(c echo.Context) error {
-	for _, v := range movies {
+func getMovieByIdHandlerV1(c echo.Context) error {
+	for _, v := range moviesV1 {
 		if v.ImdbID == c.Param("id") {
 			return c.JSON(http.StatusOK, v)
 		}
@@ -55,22 +55,22 @@ func getMovieByIdHandler(c echo.Context) error {
 	})
 }
 
-func createMovieHandler(c echo.Context) error {
+func createMovieHandlerV1(c echo.Context) error {
 	m := new(Movie)
 	if err := c.Bind(m); err != nil {
 		return c.JSON(http.StatusBadRequest, err.Error())
 	}
-	movies = append(movies, *m)
+	moviesV1 = append(moviesV1, *m)
 	return c.JSON(http.StatusCreated, map[string]string{
 		"message": "created success!",
 	})
 }
 
-func main() {
+func mainV1() {
 	e := echo.New()
-	e.GET("/movies", getAllMoviesHandler)
-	e.GET("/movies/:id", getMovieByIdHandler)
-	e.POST("/movies", createMovieHandler)
+	e.GET("/movies", getAllMoviesHandlerV1)
+	e.GET("/movies/:id", getMovieByIdHandlerV1)
+	e.POST("/movies", createMovieHandlerV1)
 	port := "2565"
 	log.Println("starting... port:", port)
 	log.Fatal(e.Start(":" + port))
