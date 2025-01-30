@@ -4,6 +4,7 @@ package main
 
 // "github.com/KittisakPh/go-basic/go-basic/constant"
 // deferr "github.com/KittisakPh/Fundamental-Golang/go-basic/defer"
+import "github.com/KittisakPh/Fundamental-Golang/bonus"
 
 // "github.com/KittisakPh/go-basic/go-basic/json"
 // import "github.com/KittisakPh/Fundamental-Golang/workshop"
@@ -14,4 +15,5 @@ func main() {
 	// workshop.ApiWorkshop()
 	// json.Json()
 	// basic.Basic()
+	bonus.Bonus()
 }
