@@ -30,7 +30,6 @@ func Workshop() {
 	// _interface()
 	// maps()
 	// Json()
-	ApiWorkshop()
 }
 
 type Movie struct {
