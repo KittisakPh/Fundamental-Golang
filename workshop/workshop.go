@@ -29,7 +29,8 @@ func Workshop() {
 	// pointer()
 	// _interface()
 	// maps()
-	Json()
+	// Json()
+	ApiWorkshop()
 }
 
 type Movie struct {
